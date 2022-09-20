@@ -1,12 +1,11 @@
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class LocalAnswerRepository {
-	private static readonly answers: Array<string> = ["animal", "pets", "food"];
+export class LocalAnswerRepository implements AnswerRepository {
+	private static readonly answers: string[] = ["animal", "pets", "food"];
 
 
-	getAllAnswer(): Array<string> {
-		console.log(LocalAnswerRepository.answers)
+	async getAllAnswer(): Promise<string[]> {
 		return LocalAnswerRepository.answers;
 	}
 
