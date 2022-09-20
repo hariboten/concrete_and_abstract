@@ -11,11 +11,12 @@ import { AnswerModule } from './answer/answer.module';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { DatabaseAnswerRepository } from './database-answer-repository';
 
 @Module({
   imports: [AuthModule, SubjectModule, AnswersModule, AnswerModule, DatabaseModule, PrismaModule, ConfigModule.forRoot({ isGlobal: true }),],
 
   controllers: [AppController],
-  providers: [AppService, LocalAnswerRepository],
+  providers: [AppService, LocalAnswerRepository, DatabaseAnswerRepository],
 })
 export class AppModule { }
