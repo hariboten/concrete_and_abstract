@@ -5,12 +5,17 @@ import { AuthModule } from './auth/auth.module';
 import { SubjectModule } from './subject/subject.module';
 import { AnswersModule } from './answers/answers.module';
 import { CatsService } from './cats/cats.service';
+
 import { LocalAnswerRepository } from './local-answer-repository';
 import { AnswerModule } from './answer/answer.module';
+import { ConfigModule } from '@nestjs/config';
+import { DatabaseModule } from './database/database.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
-  imports: [AuthModule, SubjectModule, AnswersModule, AnswerModule],
+  imports: [AuthModule, SubjectModule, AnswersModule, AnswerModule, DatabaseModule, PrismaModule, ConfigModule.forRoot({ isGlobal: true }),],
+
   controllers: [AppController],
   providers: [AppService, LocalAnswerRepository],
 })
-export class AppModule {}
+export class AppModule { }
