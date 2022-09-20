@@ -2,15 +2,15 @@ version: '3.8'
 
 services:
   dev-postgres:
-    image: mariadb:10.9.2
+    image: postgres:14.4-alpine
     ports:
-      - 50051:3306
+      - 5432:5432
     environment:
-      DB_USER: user
-      DB_PASSWORD: userpw
-      DB: concrete_and_abstract
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: rootpw
+      POSTGRES_DB: concrete_and_abstract
     restart: always
     networks:
-      - concrete_and_abstract
+      - db
 networks:
-  concrete_and_abstract:
+  db:
