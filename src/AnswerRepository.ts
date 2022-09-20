@@ -1,4 +1,4 @@
 interface AnswerRepository {
-	postAnswer(): void;
+	postAnswer(answer: string): void;
 	getAllAnswer(): Array<string>;
 }

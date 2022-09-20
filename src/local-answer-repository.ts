@@ -2,17 +2,15 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class LocalAnswerRepository {
-	private readonly answers: Array<string>;
+	private static readonly answers: Array<string> = ["animal", "pets", "food"];
 
-	constructor() {
-		this.answers = ["animal", "pets", "food"];
-	}
 
 	getAllAnswer(): Array<string> {
-		return this.answers;
+		console.log(LocalAnswerRepository.answers)
+		return LocalAnswerRepository.answers;
 	}
 
 	postAnswer(ans: string) {
-		this.answers.push(ans);
+		LocalAnswerRepository.answers.push(ans);
 	}
 }
