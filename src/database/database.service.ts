@@ -1,4 +1,4 @@
-import { Injectable, ForbiddenException } from '@nestjs/common';
+import { Injectable, ForbiddenException, HttpException, HttpStatus } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { AnswerDto } from './dto/answer.dto';
 import { Subject } from '@prisma/client';
@@ -21,11 +21,15 @@ export class DatabaseService {
     }
 
     async sendAnswer(dto: AnswerDto): Promise<Answer> {
-        const task = await this.prisma.answer.create({
-            data: {
-                ...dto,
-            },
-        });
-        return task;
+        try {
+            const task = await this.prisma.answer.create({
+                data: {
+                    ...dto,
+                },
+            });
+            return task;
+        } catch (error) {
+            throw new HttpException("Send Answer Failed", HttpStatus.INTERNAL_SERVER_ERROR)
+        }
     }
 }
