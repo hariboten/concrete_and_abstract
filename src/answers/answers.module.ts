@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import {AnswerRepository} from 'src/answer-repository';
+import {LocalAnswerRepository} from 'src/local-answer-repository';
 import { AnswersController } from './answers.controller';
 
 @Module({
   controllers: [AnswersController],
-  providers: [AnswerRepository]
+  providers: [LocalAnswerRepository]
 })
 export class AnswersModule {}

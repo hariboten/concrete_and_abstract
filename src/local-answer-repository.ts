@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class AnswerRepository {
+export class LocalAnswerRepository {
 	private readonly answers: Array<string>;
 
 	constructor() {
