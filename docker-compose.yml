@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  dev-postgres:
+    image: mariadb:10.9.2
+    ports:
+      - 50051:3306
+    environment:
+      DB_USER: user
+      DB_PASSWORD: userpw
+      DB: concrete_and_abstract
+    restart: always
+    networks:
+      - concrete_and_abstract
+networks:
+  concrete_and_abstract:
