@@ -20,13 +20,13 @@ import { AnswerDto } from './dto/answer.dto';
 export class DatabaseController {
     constructor(private readonly dbService: DatabaseService) { }
 
-    @Get()
-    getAnswers() {
-        return this.dbService.getAnswers(1)
+    @Get(":id")
+    getAnswersBySubjectId(@Param("id", ParseIntPipe) subjectId: number,) {
+        return this.dbService.getAnswersBySubjectId(subjectId)
     }
 
     @Post()
-    createTask(@Body() dto: AnswerDto): Promise<Answer> {
+    sendAnswer(@Body() dto: AnswerDto): Promise<Answer> {
         return this.dbService.sendAnswer(dto);
     }
 
