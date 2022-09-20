@@ -1,9 +1,9 @@
 import { Controller, Get } from '@nestjs/common';
-import {AnswerRepository} from 'src/answer-repository';
+import {LocalAnswerRepository} from 'src/local-answer-repository';
 
 @Controller('answers')
 export class AnswersController {
-	constructor(private readonly answerRepository: AnswerRepository) {}
+	constructor(private readonly answerRepository: LocalAnswerRepository) {}
 
 	@Get()
 	getAllAnswer(): Array<string> {
