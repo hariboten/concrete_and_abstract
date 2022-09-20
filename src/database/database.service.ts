@@ -9,7 +9,7 @@ import { Answer } from '@prisma/client';
 export class DatabaseService {
     constructor(private prisma: PrismaService) { }
 
-    getAnswers(subjectId: number): Promise<Answer[]> {
+    getAnswersBySubjectId(subjectId: number): Promise<Answer[]> {
         return this.prisma.answer.findMany({
             where: {
                 subjectId
