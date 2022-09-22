@@ -5,7 +5,7 @@ import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const config = app.get<ConfigService>(ConfigService);
+  const config = new ConfigService();
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   // TODO ホワイトリストは最終的なフロントエンドのデプロイ先urlを指定
   app.enableCors({
