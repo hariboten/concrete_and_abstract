@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class FakeAnswersRepository implements AnswerRepository {
-	private static readonly answers: string[] = ["animal", "pets", "food"];
+	private static readonly answers: string[] = [];
 
 
 	async getAllAnswer(): Promise<string[]> {
