@@ -9,7 +9,7 @@ RUN npm install
 COPY . .
 
 # RUN npx prisma migrate deploy && npm run build
-RUN npm run build
+RUN npx prisma migrate deploy
 
 # CMD [ "node", "dist/main.js" ]
-CMD ["npm","run", "start:dev"]
+CMD ["npm","run","start:dev"]
