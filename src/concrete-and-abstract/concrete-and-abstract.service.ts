@@ -16,7 +16,7 @@ export class ConcreteAndAbstractService {
 	async getAllAnswers(): Promise<string[]> {
 		return this.answersRepository
 			.getAllAnswers()
-			.then((answers) => answers.map((answer) => answer.answer));
+			.then((answers) => answers.map((ans) => ans.answer));
 	}
 	async postAnswer(answerToPost: string): Promise<Answer> {
 		const answer = new Answer(answerToPost, 0);
