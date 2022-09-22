@@ -1,8 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import {Answer} from '@prisma/client';
-import {VoteDto} from 'src/database/dto/vote.dto';
 import {ConcreteAndAbstractService} from './concrete-and-abstract.service';
 import {AnswerDto} from './dto/answer.dto';
+import {VoteDto} from './dto/vote.dto';
 
 @Controller('concrete-and-abstract')
 export class ConcreteAndAbstractController {

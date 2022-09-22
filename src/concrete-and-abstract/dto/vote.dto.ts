@@ -1,7 +1,7 @@
-import { IsOptional, IsString, IsNotEmpty } from 'class-validator';
+import { IsOptional, IsString, IsNotEmpty, IsNumber } from 'class-validator';
 
 export class VoteDto {
-    @IsString()
+    @IsNumber()
     @IsNotEmpty()
     subjectId: number;
 
