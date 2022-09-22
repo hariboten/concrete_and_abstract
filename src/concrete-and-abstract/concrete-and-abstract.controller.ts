@@ -13,7 +13,7 @@ export class ConcreteAndAbstractController {
 	}
 
 	@Get('answers')
-	async getAllAnswer(): Promise<string[]> {
+	async getAllAnswers(): Promise<string[]> {
 		return ['Answer1', 'Answer2', 'Answer3'];
 	}
 

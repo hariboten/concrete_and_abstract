@@ -15,4 +15,9 @@ describe('ConcreteAndAbstractService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  it('should return subjects', () => {
+	  expect(service.getSubject()).
+		  toEqual(['subject1', 'subject2', 'subject3']);
+  });
 });
