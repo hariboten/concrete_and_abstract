@@ -9,12 +9,12 @@ export class ConcreteAndAbstractController {
 
 	@Get('subjects')
 	async getSubject() {
-		return ['subject1', 'subject2', 'subject3'];
+		return this.appService.getSubject();
 	}
 
 	@Get('answers')
 	async getAllAnswers(): Promise<string[]> {
-		return ['Answer1', 'Answer2', 'Answer3'];
+		return this.appService.getAllAnswers();
 	}
 
 	@Post('answers')

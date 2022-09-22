@@ -1,0 +1,3 @@
+interface SubjectsRepository {
+	getSubjects(): string[];
+}
