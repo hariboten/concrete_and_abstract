@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
+import {Answer} from './answer';
 import {ConcreteAndAbstractService} from './concrete-and-abstract.service';
 import {AnswerDto} from './dto/answer.dto';
 import {VoteDto} from './dto/vote.dto';
@@ -18,12 +19,17 @@ export class ConcreteAndAbstractController {
 	}
 
 	@Post('answers')
-    async postAnswer(@Body() dto: AnswerDto): Promise<string> {
-        return "recieved answer";
+    async postAnswer(@Body() dto: AnswerDto): Promise<Answer> {
+		return this.appService.postAnswer(dto.answer);
     }
 
 	@Post('vote')
 	async postVote(@Body() dto: VoteDto): Promise<string> {
-		return "done vote"
+		return (await this.appService.postVote(dto.answer)).answer;
+	}
+
+	@Get('results')
+	async getResults(): Promise<Answer[]> {
+		return this.appService.getResults();
 	}
 }

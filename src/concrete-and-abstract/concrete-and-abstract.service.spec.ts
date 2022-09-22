@@ -1,6 +1,4 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import exp from 'constants';
-import {async} from 'rxjs';
 import { ConcreteAndAbstractService } from './concrete-and-abstract.service';
 import {FakeAnswersRepository} from './fake-answers-repository';
 import {FakeSubjectsRepository} from './fake-subjects-repository';
@@ -52,7 +50,7 @@ describe('ConcreteAndAbstractService', () => {
 		  .then(() => service.postVote('animal'))
 		  .then(() => service.postVote('animal'))
 		  .then(() => service.postVote('pets'))
-		  .then(() => service.getResult())
+		  .then(() => service.getResults())
 		  .then((result) => expect(result).toEqual(expected));
   })
 });
