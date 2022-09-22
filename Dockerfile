@@ -1,4 +1,4 @@
-FROM node:18
+FROM node:alpine
 
 WORKDIR /usr/src/app
 
@@ -8,6 +8,8 @@ RUN npm install
 
 COPY . .
 
-RUN npx prisma migrate deploy && npm run build
+# RUN npx prisma migrate deploy && npm run build
+RUN npm run build
 
-CMD [ "node", "dist/main.js" ]
+# CMD [ "node", "dist/main.js" ]
+CMD ["npm","run", "start:dev"]
