@@ -12,9 +12,10 @@ import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { DatabaseAnswerRepository } from './database-answer-repository';
+import { ConcreteAndAbstractModule } from './concrete-and-abstract/concrete-and-abstract.module';
 
 @Module({
-  imports: [AuthModule, SubjectModule, AnswersModule, AnswerModule, DatabaseModule, PrismaModule, ConfigModule.forRoot({ isGlobal: true }),],
+  imports: [AuthModule, SubjectModule, AnswersModule, AnswerModule, DatabaseModule, PrismaModule, ConfigModule.forRoot({ isGlobal: true }), ConcreteAndAbstractModule,],
 
   controllers: [AppController],
   providers: [AppService, LocalAnswerRepository, DatabaseAnswerRepository],
