@@ -1,16 +1,27 @@
 version: '3.8'
 
 services:
-  dev-postgres:
-    image: postgres:14.4-alpine
+  backend:
+    build:
+      context: .
+      dockerfile: ./backend/Dockerfile
+    tty: true
     ports:
-      - 5432:5432
-    environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: rootpw
-      POSTGRES_DB: concrete_and_abstract
-    restart: always
-    networks:
-      - db
-networks:
-  db:
+      - 3000:3000
+    volumes:
+      - .:/app/backend
+
+# services:
+#   dev-postgres:
+#     image: postgres:14.4-alpine
+#     ports:
+#       - 5432:5432
+#     environment:
+#       POSTGRES_USER: root
+#       POSTGRES_PASSWORD: rootpw
+#       POSTGRES_DB: concrete_and_abstract
+#     restart: always
+#     networks:
+#       - db
+# networks:
+#   db:
