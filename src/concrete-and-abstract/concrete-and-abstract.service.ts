@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import {Answer} from './answer';
-import {ResultDto} from './dto/result.dto';
 import {FakeAnswersRepository} from './fake-answers-repository';
 import {FakeSubjectsRepository} from './fake-subjects-repository';
 
