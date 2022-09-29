@@ -25,4 +25,5 @@ model Answer {
   answer    String?
   subjectId Int
   subject   Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  voteCount Int      @default(0)
 }

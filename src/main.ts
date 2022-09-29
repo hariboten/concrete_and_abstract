@@ -7,7 +7,6 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config = new ConfigService();
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
-  // TODO ホワイトリストは最終的なフロントエンドのデプロイ先urlを指定
   app.enableCors({
     credentials: true,
     origin: [
