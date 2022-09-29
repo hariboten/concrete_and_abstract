@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import {Answer} from './answer';
+import {Room} from './room';
 import {FakeAnswersRepository} from './fake-answers-repository';
 import {FakeSubjectsRepository} from './fake-subjects-repository';
 
@@ -10,26 +11,32 @@ export class ConcreteAndAbstractService {
 		private readonly answersRepository: FakeAnswersRepository
 	) {};
 
-	async getSubject(): Promise<string[]> {
-		return this.subjectsRepository.getSubjects();
+	/* 
+	to be duplicated
+	*/
+	async getSubject(room: Room): Promise<string[]> {
+		const subjects = this.subjectsRepository.getSubjects(room);
+		if (subjects === undefined) {
+			throw new HttpException('Room Not Found', HttpStatus.NOT_FOUND);
+		}
+		return subjects;
 	}
-	async getAllAnswers(): Promise<string[]> {
+
+	async getAllAnswers(room: Room): Promise<string[]> {
 		return this.answersRepository
-			.getAllAnswers()
+			.getAllAnswers(room)
 			.then((answers) => answers.map((ans) => ans.answer));
 	}
-	async postAnswer(answerToPost: string): Promise<Answer> {
+	async postAnswer(room: Room, answerToPost: string): Promise<Answer> {
 		const answer = new Answer(answerToPost, 0);
-		this.answersRepository.postAnswer(answer);
+		this.answersRepository.postAnswer(room, answer);
 		return answer;
 	}
 
-	async postVote(answerToVote: string): Promise<Answer> {
-		return this.answersRepository.getAnswer(answerToVote)
-			.then((ans) => new Answer(ans.answer, ans.votes + 1))
-			.then((ans) => this.answersRepository.updateAnswer(ans));
+	async postVote(room: Room, answerToVote: string): Promise<Answer> {
+		return this.answersRepository.postVote(room, 'user', answerToVote)
 	}
-	async getResults(): Promise<Answer[]> {
-		return this.answersRepository.getAllAnswers();
+	async getResults(room: Room): Promise<Answer[]> {
+		return this.answersRepository.getAllAnswers(room);
 	}
 }
