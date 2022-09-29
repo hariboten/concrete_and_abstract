@@ -7,6 +7,8 @@ import { ConcreteAndAbstractModule } from './concrete-and-abstract/concrete-and-
 import { SubjectModule } from './subject/subject.module';
 import { AnswerModule } from './answer/answer.module';
 import { VoteModule } from './vote/vote.module';
+import { UserModule } from './user/user.module';
+import { RoomModule } from './room/room.module';
 
 @Module({
   imports: [
@@ -16,6 +18,8 @@ import { VoteModule } from './vote/vote.module';
     SubjectModule,
     AnswerModule,
     VoteModule,
+    UserModule,
+    RoomModule,
   ],
 
   controllers: [AppController],

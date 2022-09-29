@@ -1,44 +1,56 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { Answer } from '@prisma/client';
+import { Vote } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { VoteDto } from './dto/vote.dto';
+import { VoteDto, VoteResultDto } from './dto/vote.dto';
 
 @Injectable()
 export class VoteService {
     constructor(private readonly prisma: PrismaService) { }
 
-    async vote(dto: VoteDto): Promise<Answer> {
-        const targetAnswer = await this.prisma.answer.findFirst({
+    async vote(dto: VoteDto): Promise<Vote> {
+        // TODO: 同一ユーザが、同じルームの複数の回答に投票するのを防ぐ
+        // TODO: 同一ユーザが、別のルームの回答に投票するのを防ぐ
+
+        const currentVote = await this.prisma.vote.findFirst({
             where: {
-                id: dto.answerId
+                ...dto
             }
         });
 
-        if (!targetAnswer) {
-            throw new HttpException('回答が存在しません', 400);
+        // 同じユーザが複数回同じ回答に投票するのを防ぐ
+        if (currentVote) {
+            throw new HttpException("同じ回答に対する複数回の投票は出来ません", 400);
         }
 
-        targetAnswer.voteCount++;
-
-        return await this.prisma.answer.update({
-            where: {
-                id: dto.answerId,
-            },
+        const vote = await this.prisma.vote.create({
             data: {
-                ...targetAnswer
+                ...dto
             }
-        })
+        });
+
+        return vote;
     }
 
-
-    async getResults(subjectId: number): Promise<Answer[]> {
-        return await this.prisma.answer.findMany({
+    async getVoteCounts(roomId: number): Promise<VoteResultDto[]> {
+        const answers = await this.prisma.answer.findMany({
             where: {
-                subjectId: subjectId,
+                roomId: roomId
             },
-            orderBy: {
-                voteCount: 'desc'
+            include: {
+                Vote: true
             }
-        })
+        });
+
+        let voteCounts: VoteResultDto[] = [];
+        answers.forEach((ans) => {
+            voteCounts.push({
+                "answerId": ans.id,
+                "answer": ans.answer,
+                "count": ans.Vote.length
+            });
+        });
+
+        return voteCounts;
+
     }
 }

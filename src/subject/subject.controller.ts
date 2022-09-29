@@ -7,9 +7,9 @@ import { SubjectService } from './subject.service';
 export class SubjectController {
     constructor(private readonly subjectService: SubjectService) { }
 
-    @Get(":id")
-    async getSubjectByID(@Param("id", ParseIntPipe) id: number): Promise<string[]> {
-        return await this.subjectService.getSubjectByID(id);
+    @Get("room/:id")
+    async getSubjectsByRoomID(@Param("id", ParseIntPipe) roomId: number): Promise<Subject[]> {
+        return await this.subjectService.getSubjectsByRoomID(roomId);
     }
 
     @Post()

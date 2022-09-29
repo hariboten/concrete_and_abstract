@@ -10,20 +10,47 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Room {
+  id        Int       @id @default(autoincrement())
+  Subject   Subject[]
+  Answer    Answer[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt()
+}
+
 model Subject {
   id        Int      @id @default(autoincrement())
+  roomId    Int
+  room      Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  title     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  subject   String   @unique
-  Answer    Answer[]
 }
 
 model Answer {
   id        Int      @id @default(autoincrement())
+  roomId    Int
+  room      Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  answer    String
+  Vote      Vote[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  answer    String?
-  subjectId Int
-  subject   Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
-  voteCount Int      @default(0)
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  Vote      Vote[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Vote {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  answerId  Int
+  answer    Answer   @relation(fields: [answerId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

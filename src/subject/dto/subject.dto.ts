@@ -1,10 +1,11 @@
-import { Answer } from '@prisma/client';
-import { IsString, IsNotEmpty } from 'class-validator';
+import { IsString, IsNotEmpty, IsNumber } from 'class-validator';
 
 export class SubjectDto {
+    @IsNumber()
+    @IsNotEmpty()
+    roomId: number;
+
     @IsString()
     @IsNotEmpty()
-    subject: string;
-
-    answer: Answer[];
+    title: string;
 }
