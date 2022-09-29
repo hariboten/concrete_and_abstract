@@ -33,4 +33,29 @@ export class ConcreteAndAbstractController {
 	async getResults(@Param('roomId', ParseIntPipe) roomId: number): Promise<Answer[]> {
 		return this.appService.getResults(new Room(roomId));
 	}
+
+	@Get('subjects')
+	async getSubjectDefaultRoom() {
+		return this.appService.getSubject(new Room(1));
+	}
+
+	@Get('answers')
+	async getAllAnswersDefaultRoom(): Promise<string[]> {
+		return this.appService.getAllAnswers(new Room(1));
+	}
+
+	@Post('answers')
+    async postAnswerDefaultRoom(@Body() dto: AnswerDto): Promise<Answer> {
+		return this.appService.postAnswer(new Room(1), dto.answer);
+    }
+
+	@Post('vote')
+	async postVoteDefaultRoom(@Body() dto: VoteDto): Promise<string> {
+		return (await this.appService.postVote(new Room(1), dto.answer)).answer;
+	}
+
+	@Get('results')
+	async getResultsDefaultRoom(): Promise<Answer[]> {
+		return this.appService.getResults(new Room(1));
+	}
 }
