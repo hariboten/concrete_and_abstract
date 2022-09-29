@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
-import { Answer } from '@prisma/client';
+import { Answer, Vote } from '@prisma/client';
 import { VoteDto } from './dto/vote.dto';
 import { VoteService } from './vote.service';
 
@@ -9,13 +9,12 @@ export class VoteController {
 
 
     @Post()
-    async vote(@Body() dto: VoteDto): Promise<Answer> {
+    async vote(@Body() dto: VoteDto): Promise<Vote> {
         return this.voteService.vote(dto);
     }
 
-    @Get("result/:id")
-    async result(@Param("id", ParseIntPipe) subjectId: number): Promise<Answer[]> {
-        return this.voteService.getResults(subjectId);
+    @Get("room/:id")
+    async getVoteCounts(@Param("id", ParseIntPipe) roomId: number) {
+        return this.voteService.getVoteCounts(roomId);
     }
-
 }

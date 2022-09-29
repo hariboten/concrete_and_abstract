@@ -1,11 +1,7 @@
 import { IsString, IsNumber, IsNotEmpty } from 'class-validator';
 
-export class AnswerDto {
+export class RoomDto {
     @IsNumber()
     @IsNotEmpty()
-    roomId: number;
-
-    @IsString()
-    @IsNotEmpty()
-    answer: string;
+    id: number;
 }

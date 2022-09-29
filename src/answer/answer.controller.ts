@@ -7,9 +7,9 @@ import { AnswerService } from './answer.service';
 export class AnswerController {
     constructor(private readonly appService: AnswerService) { };
 
-    @Get('subjectid/:id')
-    async getAllAnswers(@Param('id', ParseIntPipe) subjectId: number,): Promise<Answer[]> {
-        return this.appService.getAllAnswersBySubjectID(subjectId);
+    @Get('room/:id')
+    async getAllAnswers(@Param('id', ParseIntPipe) roomId: number,): Promise<Answer[]> {
+        return this.appService.getAllAnswersByRoomID(roomId);
     }
 
     @Post()

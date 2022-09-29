@@ -7,10 +7,10 @@ import { AnswerDto } from './dto/answer.dto';
 export class AnswerService {
     constructor(private readonly prisma: PrismaService) { }
 
-    getAllAnswersBySubjectID(subjectId: number): Promise<Answer[]> {
+    getAllAnswersByRoomID(roomId: number): Promise<Answer[]> {
         return this.prisma.answer.findMany({
             where: {
-                subjectId
+                roomId
             }
         });
     }

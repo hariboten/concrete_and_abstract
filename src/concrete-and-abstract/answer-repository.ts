@@ -1,4 +1,4 @@
-import {Answer} from "./answer";
+import { Answer } from "./answer";
 
 export interface AnswerRepository {
 	getAnswer(answer: string): Promise<Answer>;

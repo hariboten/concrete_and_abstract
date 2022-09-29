@@ -7,29 +7,26 @@ import { SubjectDto } from './dto/subject.dto';
 export class SubjectService {
     constructor(private readonly prisma: PrismaService) { }
 
-    async getSubjectByID(id: number): Promise<string[]> {
-        const subject = await this.prisma.subject.findFirst({
+    async getSubjectsByRoomID(roomId: number): Promise<Subject[]> {
+        const subject = await this.prisma.subject.findMany({
             where: {
-                id: id
+                roomId: roomId
             }
-        })
+        });
 
-        return subject.subject.split(",");
+        if (!subject) {
+            throw new HttpException("お題が見つかりませんでした", 404);
+        }
+
+        return subject;
     }
 
     async createSubject(dto: SubjectDto): Promise<Subject> {
-        try {
-            const subject = await this.prisma.subject.create({
-                data: {
-                    ...dto
-                }
-            })
-            return subject;
-        } catch (err) {
-            if (err instanceof Prisma.PrismaClientKnownRequestError) {
-                throw new HttpException('このお題は別の部屋ですでに設定されています。別のお題を設定してください', 400);
+        const subject = await this.prisma.subject.create({
+            data: {
+                ...dto
             }
-            throw new HttpException("サーバエラーが発生しました", 400);
-        }
+        })
+        return subject;
     }
 }
