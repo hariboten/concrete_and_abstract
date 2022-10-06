@@ -16,4 +16,9 @@ export class SubjectController {
     async createSubject(@Body() dto: SubjectDto): Promise<Subject> {
         return await this.subjectService.createSubject(dto);
     }
+
+    @Post("bulk")
+    async createSubjects(@Body() dto: [SubjectDto]): Promise<number> {
+        return await this.subjectService.createSubjects(dto);
+    }
 }

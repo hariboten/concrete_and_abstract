@@ -29,4 +29,11 @@ export class SubjectService {
         })
         return subject;
     }
+
+    async createSubjects(dto: [SubjectDto]): Promise<number> {
+        const subjects = await this.prisma.subject.createMany({
+            data: dto
+        })
+        return subjects.count;
+    }
 }
