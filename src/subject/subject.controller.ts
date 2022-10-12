@@ -21,4 +21,9 @@ export class SubjectController {
     async createSubjects(@Body() dto: [SubjectDto]): Promise<number> {
         return await this.subjectService.createSubjects(dto);
     }
+
+    @Get("news")
+    async fetchNews(): Promise<any> {
+        return await this.subjectService.fetchNews();
+    }
 }
