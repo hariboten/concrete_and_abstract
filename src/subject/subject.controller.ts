@@ -1,6 +1,6 @@
 import { Controller, Get, Param, ParseIntPipe, Post, Body } from '@nestjs/common';
 import { Subject } from '@prisma/client';
-import { SubjectDto } from './dto/subject.dto';
+import { SubjectDto, NewsDto } from './dto/subject.dto';
 import { SubjectService } from './subject.service';
 
 @Controller('subject')
@@ -23,7 +23,7 @@ export class SubjectController {
     }
 
     @Get("news")
-    async fetchNews(): Promise<any> {
+    async fetchNews(): Promise<NewsDto> {
         return await this.subjectService.fetchNews();
     }
 }
