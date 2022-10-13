@@ -9,3 +9,12 @@ export class SubjectDto {
     @IsNotEmpty()
     title: string;
 }
+
+export class NewsDto {
+    @IsString()
+    @IsNotEmpty()
+    title: string;
+
+    @IsString()
+    url: string;
+}
